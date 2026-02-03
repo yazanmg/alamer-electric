@@ -79,23 +79,16 @@ const AppContent: React.FC<{ currentPath: string; onNavigate: (path: string) => 
 };
 
 const App: React.FC = () => {
-  // Use hash-based routing for GitHub Pages compatibility
-  let pathname = '/';
-  
-  // Get path from hash if available, otherwise from pathname
-  if (window.location.hash) {
-    pathname = window.location.hash.slice(1) || '/';
-  } else if (window.location.pathname !== '/' && !window.location.pathname.includes('alamer-electric')) {
-    pathname = window.location.pathname;
-  }
-  
-  const [currentPath, setCurrentPath] = useState<string>(pathname);
+  const [currentPath, setCurrentPath] = useState<string>(() => {
+    const hash = window.location.hash.slice(1);
+    return hash || '/';
+  });
   
   // Listen for hash changes
   useEffect(() => {
     const handleHashChange = () => {
-      const newPath = window.location.hash.slice(1) || '/';
-      setCurrentPath(newPath);
+      const hash = window.location.hash.slice(1);
+      setCurrentPath(hash || '/');
     };
     
     window.addEventListener('hashchange', handleHashChange);
