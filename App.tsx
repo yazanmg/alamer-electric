@@ -79,27 +79,12 @@ const AppContent: React.FC<{ currentPath: string; onNavigate: (path: string) => 
 };
 
 const App: React.FC = () => {
-  const [currentPath, setCurrentPath] = useState<string>(() => {
-    const hash = window.location.hash.slice(1);
-    return hash || '/';
-  });
-  
-  // Listen for hash changes
-  useEffect(() => {
-    const handleHashChange = () => {
-      const hash = window.location.hash.slice(1);
-      setCurrentPath(hash || '/');
-    };
-    
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
-  }, []);
+  const [currentPath, setCurrentPath] = useState<string>(window.location.pathname === '/' ? '/' : window.location.pathname);
   
   // Determine language from path
   const language: Language = currentPath.startsWith('/ar') ? 'ar' : 'en';
 
   const navigate = (path: string) => {
-    window.location.hash = path;
     setCurrentPath(path);
     window.scrollTo(0, 0);
   };

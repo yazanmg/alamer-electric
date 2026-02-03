@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavigateFunction } from '../types';
 import { COMPANY_NAME_AR } from '../constants/company';
+import { Hero } from '../components/Hero';
 
 interface HomeArProps {
   onNavigate: NavigateFunction;
@@ -9,44 +10,27 @@ interface HomeArProps {
 export const HomeAr: React.FC<HomeArProps> = ({ onNavigate }) => {
   return (
     <>
-      {/* Hero Section */}
-      <section 
-        className="relative flex min-h-[500px] lg:min-h-[600px] flex-col justify-center overflow-hidden bg-cover bg-center bg-no-repeat py-20" 
-        style={{
-          backgroundImage: `linear-gradient(to left, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.7) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuBNui3N1H-kyjM3PgQvVoWXSHuE5nDE6VL-Ii0kH3Kk3dRHUuAHidxZvUZmlIDHxbbY56VCC2GxLCCG63Dk6pDrvfg-9EARinr8Lz41XUoyGgJ515vYfSg8rNS2ze-6XZHVYC6VEMA747OagsuIn_WNL2wsKGNhJfs9BiUrOnJM1xsE-S9eM4h6VwY0SpJx4eiS28LvI8dJy3YaSnbR0dtrb24FHosIOQ-rQn5toytc6ImkBAwtfvunvgQKNZ_d0a4oeWrBI09i4Kgp")`
+      <Hero
+        badge="رقم 1 في حلول الطاقة"
+        badgeIcon={<span className="material-symbols-outlined text-sm">verified</span>}
+        title={
+          <>
+            الرائدة في <br/>
+            <span className="text-transparent bg-clip-text bg-gradient-to-l from-blue-400 to-primary">التميز الكهربائي</span>
+          </>
+        }
+        description="نقدم أفضل الحلول الكهربائية للمنشآت السكنية والتجارية بأعلى معايير الجودة والأمان، لنضمن لكم طاقة مستدامة وآمنة."
+        primaryButton={{
+          text: "خدماتنا",
+          icon: <span className="material-symbols-outlined rtl:rotate-180">arrow_right_alt</span>,
+          onClick: () => onNavigate('/ar/services')
         }}
-      >
-        <div className="layout-container flex w-full flex-col">
-          <div className="flex max-w-[720px] flex-col gap-6 text-start w-full">
-            <div className="inline-flex w-fit items-center gap-2 rounded-full bg-primary/20 px-3 py-1 text-xs font-bold text-white backdrop-blur-sm border border-white/10">
-              <span className="material-symbols-outlined text-sm">verified</span>
-              <span>رقم 1 في حلول الطاقة</span>
-            </div>
-            <h1 className="text-4xl font-black leading-tight tracking-tight text-white md:text-6xl lg:text-7xl">
-              الرائدة في <br/><span className="text-primary bg-white/10 px-2 rounded-lg inline-block my-2 backdrop-blur-sm">التميز الكهربائي</span>
-            </h1>
-            <h2 className="text-lg font-medium leading-relaxed text-slate-100 md:text-xl max-w-[600px]">
-              نقدم أفضل الحلول الكهربائية للمنشآت السكنية والتجارية بأعلى معايير الجودة والأمان، لنضمن لكم طاقة مستدامة وآمنة.
-            </h2>
-            <div className="flex flex-col sm:flex-row gap-4 pt-4 w-full sm:w-auto">
-              <button 
-                onClick={() => onNavigate('/ar/services')}
-                className="flex min-w-[140px] cursor-pointer items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 text-base font-bold text-white transition-all hover:bg-blue-600 hover:shadow-lg hover:shadow-blue-500/30 w-full sm:w-auto"
-              >
-                <span>خدماتنا</span>
-                <span className="material-symbols-outlined rtl:rotate-180">arrow_right_alt</span>
-              </button>
-              <button 
-                onClick={() => onNavigate('/ar/contact')}
-                className="flex min-w-[140px] cursor-pointer items-center justify-center gap-2 rounded-lg bg-white/10 px-6 py-3 text-base font-bold text-white backdrop-blur-sm transition-all hover:bg-white/20 border border-white/20 w-full sm:w-auto"
-              >
-                <span>تواصل معنا</span>
-                <span className="material-symbols-outlined">call</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
+        secondaryButton={{
+          text: "تواصل معنا",
+          icon: <span className="material-symbols-outlined">call</span>,
+          onClick: () => onNavigate('/ar/contact')
+        }}
+      />
 
       {/* Features / Services Section */}
       <section className="section-padding bg-white dark:bg-background-dark">

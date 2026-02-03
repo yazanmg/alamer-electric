@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavigateFunction, RoutePath } from '../types';
 import { COMPANY_NAME_EN } from '../constants/company';
+import { Hero } from '../components/Hero';
 
 interface HomeProps {
   onNavigate: NavigateFunction;
@@ -9,46 +10,24 @@ interface HomeProps {
 export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
   return (
     <>
-      {/* Hero Section */}
-      <section className="relative w-full overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <div 
-            className="h-full w-full bg-cover bg-center bg-no-repeat" 
-            style={{
-              backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.7) 0%, rgba(15, 23, 42, 0.6) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuDe35sYJiaGLXzWp-gX17wkPvi-k0_6piQlWndNtMWff3ocQJ-TluV-mj7-4wxSxn2zJ3P42DAXXVXIdb8K3XqHASmz7RTmq2koDsHd_ecUkDBKw_dSpFiJU9_KuerS4v1vruPt_hcKjMzdLlzRLbP6AGlTerO4MgFwNH1I6eHiGtZ08n0h4TOBw020EHHphnvT-eFgKnphVzAXV1rCCV5IibccTsu711JkD22zQwfK2rVUvB9ZQPapdBP_kUudLlnq1t6yFw8h0Xcl")`
-            }}
-          >
-          </div>
-        </div>
-        <div className="relative z-10 layout-container py-24 lg:py-48 flex flex-col items-start justify-center min-h-[500px] lg:min-h-[600px]">
-          <div className="max-w-[720px] flex flex-col gap-6 animate-fade-in-up w-full">
-            <div className="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-3 py-1 text-sm font-medium text-white backdrop-blur-md w-fit">
-              <span className="me-2 h-2 w-2 rounded-full bg-primary"></span> Powering the Future
-            </div>
-            <h1 className="text-white text-4xl md:text-5xl lg:text-6xl font-black leading-tight tracking-tight">
-              Leading the Way in <br/>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-primary">Electrical Excellence</span>
-            </h1>
-            <p className="text-slate-200 text-lg lg:text-xl font-normal leading-relaxed max-w-[600px]">
-              Reliable engineering solutions for industrial and commercial sectors across the region. We deliver power, safety, and innovation.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 mt-4 w-full sm:w-auto">
-              <button 
-                onClick={() => onNavigate(RoutePath.Contact)}
-                className="h-12 px-8 rounded-lg bg-primary text-white text-base font-bold hover:bg-blue-600 transition-all shadow-lg shadow-blue-900/20 w-full sm:w-auto"
-              >
-                Get a Quote
-              </button>
-              <button 
-                onClick={() => onNavigate(RoutePath.Projects)}
-                className="h-12 px-8 rounded-lg bg-white/10 backdrop-blur-md border border-white/20 text-white text-base font-bold hover:bg-white/20 transition-all w-full sm:w-auto"
-              >
-                View Our Projects
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
+      <Hero
+        badge="Powering the Future"
+        title={
+          <>
+            Leading the Way in <br/>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-primary">Electrical Excellence</span>
+          </>
+        }
+        description="Reliable engineering solutions for industrial and commercial sectors across the region. We deliver power, safety, and innovation."
+        primaryButton={{
+          text: "Get a Quote",
+          onClick: () => onNavigate(RoutePath.Contact)
+        }}
+        secondaryButton={{
+          text: "View Our Projects",
+          onClick: () => onNavigate(RoutePath.Projects)
+        }}
+      />
 
       {/* About Summary Section */}
       <section className="section-padding bg-white dark:bg-[#101722]">
