@@ -1,0 +1,8 @@
+{
+  "name": "Final Al-Amer",
+  "description": "A comprehensive multimodal AI workspace allowing users to generate text, analyze images, create visuals, and interact via voice using Google Gemini models.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
