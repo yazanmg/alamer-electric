@@ -79,21 +79,34 @@ const AppContent: React.FC<{ currentPath: string; onNavigate: (path: string) => 
 };
 
 const App: React.FC = () => {
-  // Remove the base path from the pathname
-  const basePath = '/alamer-electric';
-  let pathname = window.location.pathname;
+  // Use hash-based routing for GitHub Pages compatibility
+  let pathname = '/';
   
-  // Remove the GitHub Pages base path if present
-  if (pathname.startsWith(basePath)) {
-    pathname = pathname.slice(basePath.length) || '/';
+  // Get path from hash if available, otherwise from pathname
+  if (window.location.hash) {
+    pathname = window.location.hash.slice(1) || '/';
+  } else if (window.location.pathname !== '/' && !window.location.pathname.includes('alamer-electric')) {
+    pathname = window.location.pathname;
   }
   
-  const [currentPath, setCurrentPath] = useState<string>(pathname === '/' ? '/' : pathname);
+  const [currentPath, setCurrentPath] = useState<string>(pathname);
+  
+  // Listen for hash changes
+  useEffect(() => {
+    const handleHashChange = () => {
+      const newPath = window.location.hash.slice(1) || '/';
+      setCurrentPath(newPath);
+    };
+    
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
   
   // Determine language from path
   const language: Language = currentPath.startsWith('/ar') ? 'ar' : 'en';
 
   const navigate = (path: string) => {
+    window.location.hash = path;
     setCurrentPath(path);
     window.scrollTo(0, 0);
   };
