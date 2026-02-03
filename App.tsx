@@ -79,7 +79,16 @@ const AppContent: React.FC<{ currentPath: string; onNavigate: (path: string) => 
 };
 
 const App: React.FC = () => {
-  const [currentPath, setCurrentPath] = useState<string>(window.location.pathname === '/' ? '/' : window.location.pathname);
+  // Remove the base path from the pathname
+  const basePath = '/alamer-electric';
+  let pathname = window.location.pathname;
+  
+  // Remove the GitHub Pages base path if present
+  if (pathname.startsWith(basePath)) {
+    pathname = pathname.slice(basePath.length) || '/';
+  }
+  
+  const [currentPath, setCurrentPath] = useState<string>(pathname === '/' ? '/' : pathname);
   
   // Determine language from path
   const language: Language = currentPath.startsWith('/ar') ? 'ar' : 'en';
